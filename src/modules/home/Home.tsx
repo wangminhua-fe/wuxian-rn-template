@@ -2,14 +2,15 @@
  * @Author: Marshall
  * @Date: 2023-12-09 17:51:20
  * @LastEditors: Marshall
- * @LastEditTime: 2023-12-09 23:49:59
+ * @LastEditTime: 2023-12-10 00:14:34
  * @Description:
  * @FilePath: /wuxian-rn-template/src/modules/home/Home.tsx
  */
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, ScrollView} from 'react-native';
 import {Button} from '@ant-design/react-native';
 import {test} from '../../api';
+import Config from 'react-native-config';
 
 export default () => {
   const [content, setContent] = useState('');
@@ -23,11 +24,12 @@ export default () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text>Hello Wuxian!</Text>
       <Text>接口请求结果:{content}</Text>
+      <Text>环境变量:{Config.APP_BASE_URL}</Text>
       <Button type="primary">按钮</Button>
-    </View>
+    </ScrollView>
   );
 };
 
