@@ -2,6 +2,8 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -76,11 +78,12 @@ android {
 
     namespace "com.rntemplate"
     defaultConfig {
+        resValue "string", "build_config_package", "com.rntemplate"
         applicationId "com.rntemplate"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode generateVersionCode()
+        versionName generateVersionName()
     }
     signingConfigs {
         debug {
@@ -102,6 +105,29 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+}
+
+/**
+ * Internal version number generator
+ * Refer https://developer.android.com/google/play/publishing/multiple-apks.html#using-a-version-code-scheme
+*/
+private Integer generateVersionCode() {
+    String versionCode = project.env.get("VERSION_CODE");
+    if (versionCode) {
+        return versionCode.toInteger();
+    }
+    return 1;
+}
+
+/**
+ * Internal version name generator
+*/
+private String generateVersionName() {
+   return project.env.get("VERSION_NAME");
+}
+
+private String generatePackageName() {
+   return project.env.get("APP_DISPLAY_NAME");
 }
 
 dependencies {

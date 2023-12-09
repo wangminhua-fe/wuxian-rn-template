@@ -2,15 +2,16 @@
  * @Author: Marshall
  * @Date: 2023-12-09 16:32:06
  * @LastEditors: Marshall
- * @LastEditTime: 2023-12-09 17:06:45
+ * @LastEditTime: 2023-12-09 23:43:52
  * @Description:
  * @FilePath: /wuxian-rn-template/src/utils/request.ts
  */
 import axios from 'axios';
 import qs from 'querystring';
+import Config from 'react-native-config';
 
 const service = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: Config.APP_BASE_URL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
