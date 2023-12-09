@@ -2,20 +2,22 @@
  * @Author: Marshall
  * @Date: 2023-12-09 17:51:20
  * @LastEditors: Marshall
- * @LastEditTime: 2023-12-09 19:35:12
+ * @LastEditTime: 2023-12-09 22:23:23
  * @Description:
  * @FilePath: /wuxian-rn-template/src/modules/home/Home.tsx
  */
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button} from '@ant-design/react-native';
 import {test} from '../../api';
 
 export default () => {
+  const [content, setContent] = useState('');
   const apiTest = async () => {
     const res = await test();
-    console.log('请求结果：', res);
+    setContent(JSON.stringify(res));
   };
+
   useEffect(() => {
     apiTest();
   }, []);
@@ -23,6 +25,7 @@ export default () => {
   return (
     <View style={styles.container}>
       <Text>Hello Wuxian!</Text>
+      <Text>接口请求结果:{content}</Text>
       <Button type="primary">按钮</Button>
     </View>
   );
