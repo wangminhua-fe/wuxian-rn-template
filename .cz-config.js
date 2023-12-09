@@ -12,12 +12,20 @@ module.exports = {
   ],
   // 可以根据需要自定义 scopes
   scopes: [
-    { name: 'core' },
-    { name: 'docs' },
-    { name: 'ui' },
-    { name: 'build' },
-    { name: 'test' }
-  ],
+    ['components', '组件相关'],
+    ['hooks', 'hook 相关'],
+    ['utils', 'utils 相关'],
+    ['styles', '样式相关'],
+    ['deps', '项目依赖'],
+    ['other', '其他修改'],
+    // 如果选择 custom，后面会让你再输入一个自定义的 scope。也可以不设置此项，把后面的 allowCustomScopes 设置为 true
+    ['custom', '以上都不是？我要自定义']
+  ].map(([value, description]) => {
+    return {
+      value,
+      name: `${value.padEnd(30)} (${description})`
+    }
+  }),
   // 你可以根据需要自定义 scope 的位置
   scopeOverrides: {
     fix: [{ name: 'merge' }, { name: 'style' }, { name: 'e2eTest' }],
@@ -39,7 +47,7 @@ module.exports = {
   allowBreakingChanges: ['feat', 'fix'],
   // 按照你的需要添加确认问题
   // 是否允许跳过 scope 的确认步骤
-  skipScope: false,
+  skip: ['body', 'footer'],
   // 你可以在这里为每个 type 提示符的位置定义一个函数
   // 可以添加额外的提示问题
   subjectLimit: 100
