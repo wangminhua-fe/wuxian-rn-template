@@ -1,0 +1,10 @@
+//
+//  Config.xcconfig
+//  RnTemplate
+//
+//  Created by Marshall Wang on 2023/12/11.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+#include? "tmp.xcconfig"
